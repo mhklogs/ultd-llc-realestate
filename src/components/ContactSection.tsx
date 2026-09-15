@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, FormEvent } from 'react';
+import React, { useState, useRef, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Send, Phone, Mail, MapPin, Clock, ArrowUpRight, ShieldCheck, AlertCircle, CheckCircle2, X } from 'lucide-react';
+import { Send, Phone, Mail, MapPin, AlertCircle, CheckCircle2, X } from 'lucide-react';
 import { ActivePage } from '../types';
 
 interface ContactSectionProps {
@@ -213,6 +213,22 @@ export default function ContactSection({ onChangePage }: ContactSectionProps) {
                   className="w-full bg-[#101114] border border-white/10 py-3 px-4 text-xs font-mono text-[#F4F4F6] placeholder-[#8E909A] focus:outline-none focus:border-[#C5A059] transition-colors rounded-[2px]"
                   id="form-phone"
                 />
+              </div>
+
+              {/* Subject Select */}
+              <div>
+                <select
+                  value={formData.subject}
+                  onChange={(e) => handleInputChange('subject', e.target.value)}
+                  className="w-full bg-[#101114] border border-white/10 py-3 px-4 text-xs font-mono text-[#F4F4F6] placeholder-[#8E909A] focus:outline-none focus:border-[#C5A059] transition-colors rounded-[2px] appearance-none cursor-pointer"
+                  id="form-subject"
+                >
+                  {subjects.map((subj) => (
+                    <option key={subj} value={subj} className="bg-[#101114] text-[#F4F4F6]">
+                      {subj}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Message Input */}

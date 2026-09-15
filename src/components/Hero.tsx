@@ -31,10 +31,9 @@ const TOTAL_HERO_FRAMES = 150;
 
 interface HeroProps {
   onChangePage: (page: ActivePage) => void;
-  theme?: 'light' | 'dark';
 }
 
-export default function HeroSection({ onChangePage }: HeroProps) {
+export default function HeroSection(_props: HeroProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

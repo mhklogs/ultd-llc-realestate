@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,8 +23,6 @@ import PrivacyView from './components/PrivacyView';
 import LeadershipView from './components/LeadershipView';
 import LandingLeadership from './components/LandingLeadership';
 import ServicesView from './components/ServicesView';
-
-
 import PropertiesHub from './components/PropertiesHub';
 import DotNavigation from './components/DotNavigation';
 
@@ -47,7 +45,6 @@ export default function App() {
   const [activeModal, setActiveModal] = useState<ModalView>(getInitialModal);
   const [regulatoryTab, setRegulatoryTab] = useState<'trec' | 'terms' | 'privacy'>('trec');
   const [contactPreFill, setContactPreFill] = useState<string | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   // Initialize Lenis Smooth Scroll Engine & GSAP ScrollTrigger Synchronization
   useEffect(() => {
@@ -136,20 +133,11 @@ export default function App() {
     }
   }, [activePage]);
 
-  // Sync theme with body and HTML element classes
+  // Site is a fixed dark cinematic theme; keep the class on both <html> and <body>
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.body.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.classList.remove('dark');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-  };
+    document.documentElement.classList.add('dark');
+    document.body.classList.add('dark');
+  }, []);
 
   const scrollToTargetSection = (page: string) => {
     const targetMap: Record<string, string> = {
@@ -334,12 +322,18 @@ export default function App() {
         onChangePage={handlePageChange}
       />
 
+      {/* Mobile Top Navigation (visible on small screens, hidden on desktop) */}
+      <Navbar 
+        activePage={activePage} 
+        onChangePage={handlePageChange} 
+      />
+
 
       {/* Main Single Page Stage */}
       <main className="flex-grow">
         <div id="main-single-page" className="w-full">
           {/* 1. Hero Video / Hero Section */}
-          <Hero onChangePage={handlePageChange} theme={theme} />
+          <Hero onChangePage={handlePageChange} />
 
           {/* 2. Legacy / About Section */}
           <div id="legacy" className="relative z-10 w-full h-auto min-h-screen bg-[#070709] mb-0 overflow-visible">

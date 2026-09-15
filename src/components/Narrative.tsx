@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import { EXECUTIVES } from '../data';
 import { ActivePage } from '../types';
 
 interface NarrativeProps {
